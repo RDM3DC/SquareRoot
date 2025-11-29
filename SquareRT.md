@@ -1,467 +1,89 @@
-1. Core idea: √ as a geometric fixed point in πₐ-geometry
+# Adaptive Square Root in πₐ-geometry
 
-Standard square root is defined algebraically:
+This note describes an interpretation of the square root as a geometric fixed point in an adaptive, curvature-aware geometry where the constant $\pi$ is replaced by a local, memoryful field $\pi_a$.
 
-𝑟
-=
-𝐴
-⟺
-𝐴
-=
-𝜋
-𝑟
-2
-(
-if you interpret 
-𝐴
- as disk area
-)
-.
-r=
-A
-	​
+## 1. Core idea: √ as a geometric fixed point in πₐ-geometry
 
-⟺A=πr
-2
-(if you interpret A as disk area).
+The standard circle-area relation is
+$$
+A = \pi r^2 \quad\Longleftrightarrow\quad r = \sqrt{\frac{A}{\pi}}.
+$$
 
-In Adaptive π geometry, π is replaced by a curvature-aware field:
+In adaptive $\pi$-geometry we replace $\pi$ by a curvature-aware field $\pi_a$ that depends on position $p$, radius $r$, and possibly deformation history. One simple phenomenological form is
+$$
+\pi_a(p,r) = \pi + \beta\,K(p)\,e^{-r/\ell} + \dots
+$$
+where $K(p)$ is the local curvature, $\beta$ is a coupling, $\ell$ is a scale, and higher-order terms or memory dynamics may be present.
 
-𝜋
-𝑎
-(
-𝑝
-)
-=
-𝜋
-+
-𝛽
- 
-𝐾
-(
-𝑝
-)
- 
-𝑒
-−
-𝑟
-/
-ℓ
-+
-…
-π
-a
-	​
+We then define the adaptive square root of a positive quantity $A$ at point $p$ as the radius $r$ satisfying
+$$
+A = \pi_a(p,r)\,r^2.
+$$
 
-(p)=π+βK(p)e
-−r/ℓ
-+…
+In flat space where $K\to 0$ we recover $\pi_a\to\pi$ and hence the usual relation $r=\sqrt{A/\pi}$. In curved or memoryful space $\pi_a$ drifts and the radius realizing the same "area" changes — this is the new adaptive $\sqrt{\cdot}$.
 
-where 
-𝐾
-(
-𝑝
-)
-K(p) is local curvature, 
-𝛽
-β is a coupling, 
-ℓ
-ℓ is a scale, and πₐ can also “remember” deformations via ARP-style dynamics.
+There is an equivalent circumference formulation: find $r$ such that
+$$
+L = 2\,\pi_a(p,r)\,r,
+$$
+which corresponds to interpreting the measurement in terms of circumference $L$ rather than area $A$.
 
-So we define an adaptive square root of a positive quantity 
-𝐴
-A at point 
-𝑝
-p as:
+## 2. Fixed-point / ARP update for the adaptive √
 
-𝐴
-𝜋
-𝑎
- 
-(
-𝑝
-)
-  
-:
-=
-  
-𝑟
-  
- such that 
-  
-𝐴
-  
-=
-  
-𝜋
-𝑎
-(
-𝑝
-,
-𝑟
-)
- 
-𝑟
-2
-π
-a
-	​
+Rather than solving $A=\pi_a(p,r)r^2$ analytically, treat $\sqrt{\cdot}$ as the fixed point of a small adaptive dynamical system (ARP-like).
 
-A
-	​
-
-(p):=r such that A=π
-a
-	​
-
-(p,r)r
-2
-	​
-
-
-In flat space: 
-𝐾
-→
-0
-⇒
-𝜋
-𝑎
-→
-𝜋
-K→0⇒π
-a
-	​
-
-→π, so 
-𝐴
-=
-𝜋
-𝑟
-2
-⇒
-𝑟
-=
-𝐴
-/
-𝜋
-A=πr
-2
-⇒r=
-A/π
-	​
-
-, i.e. the usual circle-area picture.
-
-In curved or “remembering” space, πₐ drifts, so the radius that realizes the same “area” is different. That’s the new √.
-
-You can also do a circumference version:
-
-𝐿
-𝜋
-𝑎
- 
-(
-𝑝
-)
-:
-=
-𝑟
- such that 
-𝐿
-=
-2
- 
-𝜋
-𝑎
-(
-𝑝
-,
-𝑟
-)
- 
-𝑟
-π
-a
-	​
-
-L
-	​
-
-(p):=r such that L=2π
-a
-	​
-
-(p,r)r
-
-Both are equivalent up to how you want to interpret “what √ is measuring” (area vs length).
-
-2. Fixed-point / ARP update for the adaptive √
-
-Instead of solving 
-𝐴
-=
-𝜋
-𝑎
-(
-𝑝
-,
-𝑟
-)
-𝑟
-2
-A=π
-a
-	​
-
-(p,r)r
-2
- analytically, we treat √ as the fixed point of an adaptive rule, just like your ARP conductance equation.
-
-Define an error functional at radius 
-𝑟
-r:
-
-𝐸
-(
-𝑟
-)
-:
-=
-𝐴
-−
-𝜋
-𝑎
-(
-𝑝
-,
-𝑟
-)
- 
-𝑟
-2
-E(r):=A−π
-a
-	​
-
-(p,r)r
-2
-
-We want 
-𝐸
-(
-𝑟
-∗
-)
-=
-0
-E(r
-∗
-)=0. We introduce an adaptive radius 
-𝑟
-(
-𝑡
-)
-r(t) and a memoryful πₐ field that co-evolve:
+Define an error functional at radius $r$:
+$$
+E(r) := A - \pi_a(p,r)\,r^2.
+$$
+We want $E(r^*)=0$. Introduce time-dependent variables $r(t)$ and $\pi_a(t)$ that co-evolve under simple adaptive dynamics:
 
 Radius update (gradient / ARP-like):
+$$
+\dot r = \alpha\,E(r) - \mu_r\, r,
+$$
 
-𝑟
-˙
-=
-𝛼
- 
-𝐸
-(
-𝑟
-)
-−
-𝜇
-𝑟
- 
-𝑟
-r
-˙
-=αE(r)−μ
-r
-	​
+Geometry / memory update:
+$$
+\dot \pi_a = \gamma\,E(r) - \mu_\pi\, (\pi_a - \pi_0).
+$$
 
-r
+Here $\alpha$ is the learning rate for the radius, $\gamma$ is the learning rate for $\pi_a$, $\mu_r$ and $\mu_\pi$ are leak terms to stabilize dynamics, and $\pi_0$ is the rest (Euclidean) baseline $\pi$.
 
-πₐ update (geometric memory / adaptive curvature):
+At equilibrium, if leaks dominate the memory,
+$$
+E(r^*)=0,\qquad \pi_a^* \approx \pi_0,
+$$
+so we recover $A \approx \pi_0\,{r^*}^2$. If memory/curvature terms are significant then $\pi_a^*$ can differ from $\pi_0$ and the adaptive square root depends on deformation history.
 
-𝜋
-˙
-𝑎
-=
-𝛾
- 
-𝐸
-(
-𝑟
-)
-−
-𝜇
-𝜋
- 
-(
-𝜋
-𝑎
-−
-𝜋
-0
-)
-π
-˙
-a
-	​
+Thus the adaptive $\sqrt{\cdot}$ is the fixed point of this tiny dynamical system:
+$$
+r^*(p;A) \quad\text{such that}\quad A = \pi_a^*(p,r^*) {r^*}^2.
+$$
 
-=γE(r)−μ
-π
-	​
+## 3. Practical discrete algorithm (what lives nicely in code)
 
-(π
-a
-	​
+A simple discrete version suitable for implementation (and what we've been experimenting with) is:
 
-−π
-0
-	​
-
-)
-
-Here:
-
-𝛼
-α = learning rate for the radius.
-
-𝛾
-γ = learning rate for πₐ.
-
-𝜇
-𝑟
-,
-𝜇
-𝜋
-μ
-r
-	​
-
-,μ
-π
-	​
-
- = leak terms that stabilize the dynamics.
-
-𝜋
-0
-π
-0
-	​
-
- = rest geometry (flat Euclidean baseline).
-
-At equilibrium:
-
-𝐸
-(
-𝑟
-∗
-)
-=
-0
-,
-𝜋
-𝑎
-∗
-=
-𝜋
-0
-  
-(if leaks dominate)
-⇒
-𝐴
-=
-𝜋
-𝑎
-∗
-(
-𝑟
-∗
-)
-2
-E(r
-∗
-)=0,π
-a
-∗
-	​
-
-=π
-0
-	​
-
-(if leaks dominate)⇒A=π
-a
-∗
-	​
-
-(r
-∗
-)
-2
-
-So the new √ is literally the fixed point of a tiny dynamical system:
-
-𝑟
-∗
-(
-𝑝
-;
-𝐴
-)
-=
-𝐴
-𝜋
-𝑎
-r
-∗
-(p;A)=
-π
-a
-	​
-
-A
-	​
-
-
-and you can let πₐ either:
-
-relax to π₀ (giving you classical √ in the flat limit), or
-
-retain some memory/curvature so the √ depends on the deformation history.
-
-3. Practical discrete algorithm (what lives nicely in code)
-
-The discrete version (what we’ve essentially been playing with in all the ARP updates) is:
-
-def adaptive_sqrt_pi_a(A, pi_a_init, 
-                       alpha=0.2, gamma=0.1, 
-                       mu_r=0.05, mu_pi=0.05, 
+```python
+def adaptive_sqrt_pi_a(A, pi_a_init,
+                       alpha=0.2, gamma=0.1,
+                       mu_r=0.05, mu_pi=0.05,
                        r_init=None, steps=200):
     """
     Adaptive π-based square root:
-    Find r such that A ≈ π_a * r**2,
-    with π_a itself adapting via ARP-like feedback.
+    Find r such that A ≈ pi_a * r**2,
+    with pi_a itself adapting via ARP-like feedback.
     """
     pi_a = float(pi_a_init)
     if r_init is None:
         # naive initial guess in Euclidean geometry
-        r = (A / max(pi_a, 1e-8))**0.5
+        r = (A / max(pi_a, 1e-12))**0.5
     else:
         r = float(r_init)
 
     for _ in range(steps):
-        # current "area" under π_a-geometry
+        # current "area" under pi_a-geometry
         A_hat = pi_a * r * r
         error = A - A_hat
 
@@ -472,14 +94,11 @@ def adaptive_sqrt_pi_a(A, pi_a_init,
         pi_a += gamma * error - mu_pi * (pi_a - pi_a_init)
 
     return r, pi_a
-
+```
 
 Interpretation:
+- `r` typically converges to the adaptive square root of `A`.
+- `pi_a` can drift and then relax, encoding how much the underlying geometry had to adapt.
+- In a full field theory you'd run this at every point `p`, and couple `pi_a` to curvature `K(p)` rather than a single scalar.
 
-r converges to your adaptive √ of A.
-
-pi_a can drift and then relax, encoding how “hard” the space had to bend to realize that √.
-
-In a full field theory, you’d run this at each point 
-𝑝
-p with πₐ coupled to curvature K(p) instead of a single scalar.
+---
